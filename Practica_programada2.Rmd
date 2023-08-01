@@ -110,3 +110,22 @@ tabla_paises_bajos_aqi
 tabla_paises_altos_aqi
 
 ```
+
+e. Para los 10 países con los valores promedios más altos de AQI, muestrelos en un mapa de leaflet usando
+addMarkers o un addCircles. En el popup debe colocar el valor promedio del AQI. (6pts)
+```{r}
+paises_mas_altos_aqi <- promedio_por_pais |> 
+  arrange(desc(Promedio_AQI)) |> 
+  head(10)
+
+datos_paises_mas_altos_aqi <- datos |> 
+  filter(Country %in% paises_mas_altos_aqi$Country)
+mapa <- leaflet(data = datos_paises_mas_altos_aqi) |> 
+  addTiles() |> 
+  addMarkers(
+    lat = ~lat,
+    lng = ~lng,
+    popup = ~paste("País: ", Country, "<br>Promedio AQI: ", `AQI Value`)
+  )
+mapa
+```
