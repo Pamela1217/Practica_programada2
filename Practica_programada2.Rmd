@@ -1,0 +1,22 @@
+---
+title: "Practica programada 2"
+author: "Sandra López Torres"
+date: "2023-08-04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(stringr)
+library(readr)
+library(readxl) 
+library(writexl) 
+library(utils)
+library(RSQLite) 
+library(DBI) 
+library(lubridate)
+library(gt)
+library(leaflet)
+library(openxlsx)
+```
