@@ -73,3 +73,40 @@ tabla_gt <- tabla_gt |>
 tabla_gt
 
 ```
+
+d. Obtenga el promedio del AQI Value por país, y cree 2 tablas: Una que muestre los 10 países con los
+valores más bajos de AQI, y otra que muestre los 10 países con los valores más altos de AQI. Presente
+estas tablas con el paquete gt, añadiendo títulos y subtítulos
+
+```{r}
+promedio_por_pais <- datos |> 
+  group_by(Country) |> 
+  summarize(Promedio_AQI = mean(`AQI Value`))
+
+paises_mas_bajos_aqi <- promedio_por_pais |> 
+  arrange(Promedio_AQI) |> 
+  head(10)
+
+tabla_paises_bajos_aqi <- gt(paises_mas_bajos_aqi)
+
+tabla_paises_bajos_aqi <- tabla_paises_bajos_aqi |> 
+  tab_header(
+    title = "Países con los valores más bajos de AQI",
+    subtitle = "Promedio del AQI Value"
+  )
+
+paises_mas_altos_aqi <- promedio_por_pais |> 
+  arrange(desc(Promedio_AQI)) |> 
+  head(10)
+tabla_paises_altos_aqi <- gt(paises_mas_altos_aqi)
+
+tabla_paises_altos_aqi <- tabla_paises_altos_aqi |> 
+  tab_header(
+    title = "Países con los valores más altos de AQI",
+    subtitle = "Promedio del AQI Value"
+  )
+
+tabla_paises_bajos_aqi
+tabla_paises_altos_aqi
+
+```
