@@ -34,3 +34,11 @@ datos <- read_csv(url)
 
 glimpse(datos)
 ```
+
+b. Cuántas categorías diferentes de AQI (AQI Category) hay en este conjunto de datos? Cuáles son?
+
+```{r}
+aqi_categorias <- unique(datos$`AQI Category`)
+print(aqi_categorias)
+```
+R/ Hay 6 diferentes tipos de categorías
