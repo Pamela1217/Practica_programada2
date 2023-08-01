@@ -42,3 +42,34 @@ aqi_categorias <- unique(datos$`AQI Category`)
 print(aqi_categorias)
 ```
 R/ Hay 6 diferentes tipos de categorías
+
+
+c. Cree una tabla que indique la cantidad de ciudades que hay en cada categoría de AQI (AQI Category).
+Adicionalmente, traduzca las categorías a español, por ejemplo “Good” sería “Bueno”. Presente esta
+tabla con el paquete gt, añadiendo títulos y subtítulos.
+
+```{r}
+traducir_espa <- c(
+  "Good" = "Bueno",
+  "Moderate" = "Moderado",
+  "Unhealthy for Sensitive Groups" = "Insalubre para grupos sensibles",
+  "Unhealthy" = "Insalubre",
+  "Very Unhealthy" = "Muy insalubre",
+  "Hazardous" = "Peligroso"
+)
+datos$`AQI Category` <- traducir_espa[datos$`AQI Category`]
+
+tabla_resumen <- datos |> 
+  group_by(`AQI Category`) |> 
+  summarize(Cantidad_de_Ciudades = n())
+
+tabla_gt <- gt(tabla_resumen)
+
+tabla_gt <- tabla_gt |> 
+  tab_header(
+    title = "Cantidad de Ciudades por Categoría",
+    subtitle = "Calidad del aire"
+  )
+tabla_gt
+
+```
